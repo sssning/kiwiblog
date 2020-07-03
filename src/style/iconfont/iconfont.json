@@ -1,0 +1,44 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "124857",
+      "name": "微博",
+      "font_class": "weibo",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "3876518",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    },
+    {
+      "icon_id": "5634857",
+      "name": "steam",
+      "font_class": "steam",
+      "unicode": "f23b",
+      "unicode_decimal": 62011
+    },
+    {
+      "icon_id": "10918077",
+      "name": "bilibili-fill",
+      "font_class": "bilibili-fill",
+      "unicode": "e75c",
+      "unicode_decimal": 59228
+    },
+    {
+      "icon_id": "11993689",
+      "name": "zhihu",
+      "font_class": "zhihu",
+      "unicode": "e7e9",
+      "unicode_decimal": 59369
+    }
+  ]
+}

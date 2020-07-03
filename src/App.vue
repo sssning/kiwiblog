@@ -1,0 +1,58 @@
+<template>
+  <div id="app">
+      <section>
+        <Navigation />
+        <router-view/>
+        <FooterBar :setting='setting' />
+      </section>
+       <el-backtop>
+      </el-backtop>    
+  </div>
+</template>
+
+<script>
+import Vue from 'vue'
+import {getSettingInfo} from '@/api/setting'
+import '@/style/style.css'
+import '@/style/iconfont/iconfont.js'
+import Navigation from '@/components/Navigation'
+import FooterBar from "@/components/Footer"
+
+
+export default {
+    data(){
+        return{
+           setting:{} 
+        }
+    },
+    components:{Navigation,FooterBar},
+    methods:{
+      getSetting(){
+        getSettingInfo().then(res=>{
+          this.setting = res.data;
+        })
+      }
+    },
+    created:function(){
+      this.getSetting()
+    }
+}
+</script>
+
+<style lang="scss">
+#app {
+  position: relative;
+  display: flex;
+  section{
+    flex:1
+  }
+}
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+</style>
