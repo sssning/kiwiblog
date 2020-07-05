@@ -2,13 +2,14 @@
   <div id="app">
       <section>
         <Navigation />
-        <router-view/>
+          <router-view/>
         <FooterBar :setting='setting' />
       </section>
        <el-backtop>
-      </el-backtop>    
+      </el-backtop>   
   </div>
 </template>
+
 
 <script>
 import Vue from 'vue'
@@ -17,7 +18,7 @@ import '@/style/style.css'
 import '@/style/iconfont/iconfont.js'
 import Navigation from '@/components/Navigation'
 import FooterBar from "@/components/Footer"
-
+import axios from 'axios'
 
 export default {
     data(){
@@ -30,11 +31,22 @@ export default {
       getSetting(){
         getSettingInfo().then(res=>{
           this.setting = res.data;
+          this.getWeather(res.ip);
+        })
+      },
+      getWeather(ip){
+        axios.get('https://free-api.heweather.net/s6/weather/now',{
+          params:{
+            location:ip,
+            key:"36aff7f0dc9744f2a08c81eaa5541ce6"
+          }
+        }).then(res=>{
+          this.$store.commit('setWeather',res.data.HeWeather6[0].now);
         })
       }
     },
     created:function(){
-      this.getSetting()
+      this.getSetting();  
     }
 }
 </script>

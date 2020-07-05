@@ -1,89 +1,132 @@
 <template>
     <div id='archives'>
-        <div class='section-banner'>
-            <div class='banner'></div>
-        </div>
-        <div class='section-main'>
-            <div class='container'>
+        <div class='archives-main'>
+            <div class='archives-container'>
                <div class='card'>
                    <div class='card-title'>
                         <h2>{{docs.title}}</h2>
                         <p class='author'>
-                            <span><i class="el-icon-date"></i>{{docs.date}}</span>
+                            <span><i class="el-icon-date"></i> {{docs.date}}</span>
+                            <span><i class='el-icon-view'></i> {{docs.views}}</span>
                         </p>
                    </div>
                    <el-divider></el-divider>
                    <div class='content' v-html="docs.html" ></div>
                    <el-divider></el-divider>
-                   <div class='comments'>
-                       <div>
-
-                       </div>
-                   </div>
                </div>
+            </div>
+            <div class='comment-container'>
+                <div class='comment-submit comment-sharing'>
+                    <el-row>
+                        <el-input class='name' v-model="form.name" size='mini' placeholder="昵称"></el-input>
+                    </el-row>
+                    <el-row>
+                        <el-input
+                            class='content'
+                            type="textarea"
+                            size='mini'
+                            placeholder="随便填"
+                            resize='none'
+                            v-model="form.content">
+                        </el-input>
+                    </el-row>
+                    <el-row>
+                        <el-button type="primary" size='mini' @click="submitComment">发表评论</el-button>
+                    </el-row>
+                </div>
+                <div class='comment-item comment-sharing' v-for='(item,index) in comments' :key='index'>
+                    <div class='head'>
+                        <div class='img'><img src='https://raindays.cn/image/comment/10.jpg' /></div>
+                        <div class='name'>
+                            <a href='javascript:void(0);'>{{item.name}}</a>
+                            <div>
+                              <span>{{item.date}}</span>  
+                            </div>
+                        </div>
+                    </div>
+                    <div class='comment-content'>
+                        {{item.content}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import * as api from "@/api/docs.ts"
+import * as docsApi from "@/api/docs.ts"
+import {formatDate} from "@/utils/common.ts"
+import * as commentApi from "@/api/comment.ts"
 
 export default {
     name:'archives',
     data(){
         return{
             docs:{},
+            form:{
+                id:this.$route.query.id,
+                name:'',
+                content:''
+            },
             comments:[]
         }
     },
     methods:{
         getDocsDetails(){
-            api.getDocsDetails({id:this.$route.query.id}).then(res=>{
+            docsApi.getDocsDetails({id:this.$route.query.id}).then(res=>{
                 res.data.html = unescape(res.data.html);
                 this.docs = res.data;
             })
         },
-
+        getComments(){
+            commentApi.commentsList({id:this.$route.query.id}).then(res=>{
+                this.comments = res.data;
+            })
+        },
+        submitComment(){
+            let sendData = this.form;
+            if(!this.form.name){
+                this.$message.error('难道阁下就是佚名！');
+                return
+            }
+            if(!this.form.content){
+                this.$message.error('一个字起步！');
+                return
+            }
+            this.form.date = formatDate(new Date().getTime());
+            commentApi.addComment(this.form).then(res=>{
+                this.$message.success(res.msg);
+                this.form.name = '';
+                this.form.content = '';
+                this.getComments();
+            })
+        },
     },
     created:function(){
-        this.getDocsDetails()
+        this.getDocsDetails();
+        this.getComments();
     }
 
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 #archives{
     width: 100%;
-    min-height: 700px;
-    background: #f4f5f7;
-    .section-banner{
-        height: 85vh;
-        position: relative;
-        .banner{
-            width: 100%;
-            height: 100%;
-            background: url('https://img.sssyao.cn/images/img2.jpg')  no-repeat center/cover;
-            background-attachment: fixed;
-            position: absolute;
-            z-index: 1;
-            top: 0;
-        }
-    }
-    .section-main{  
+    .archives-main{  
         position: relative;
         padding-top: 4rem;
         padding-bottom: 4rem;
-        .container{
+        .archives-container{
             display: flex;
             justify-content: center;
+            margin-bottom: 20px;
             .card{
                 margin-top: -150px;
                 padding: 30px 50px;
                 box-sizing: border-box;
-                width: 80vw; 
                 min-width: 600px;
+                width: 100%;
                 background: #fff;
                 position: relative;
                 z-index: 2;
@@ -134,6 +177,7 @@ export default {
                 .card-title{
                     margin: 50px auto;
                     text-align: center;
+                    color: #333;
                     h2{
                         font-size: 2.75rem;
                         font-weight: 600;
@@ -162,6 +206,66 @@ export default {
                 }
             }
         } 
+        .comment-container{
+            .comment-sharing{
+                background: #fff;
+                padding: 20px;
+                box-sizing: border-box;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+            }
+            .comment-submit{
+                .name{
+                    width: 30%;
+                }
+                .el-row{
+                    margin-bottom: 10px;
+                }
+                textarea{
+                    height: 100px;
+                }
+            }
+            .comment-item{
+                .head{
+                    display: flex;
+                    img{
+                        width: 48px;
+                        height: 48px;
+                        border-radius: 50%;
+                        margin-right: 15px;
+                    }
+                    .name{
+                        flex:1;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        a{
+                            font-weight: 400;
+                            color: #ef6d57;
+                            font-size: 16px;
+                            height: 20px;
+                            transition: all .3s;
+                            text-decoration: none;
+                            position: relative;
+                            &:hover{
+                                text-decoration: underline;
+                            }
+                        }
+                        span{
+                            color: #999;
+                            font-size: 13px;
+                            letter-spacing: 0;
+                        }
+                    }
+                }
+                .comment-content{
+                    color: #303030;
+                    font-size: 13px;
+                    padding-left: 63px;
+                }
+            }
+        }
     }  
 }
 

@@ -7,10 +7,16 @@ const routes: Array<RouteConfig> = [
     {
       path:'/',
       component: ()=>import('@/views/home/index.vue'),
-    },
-    {
-      path:'/setting',
-      component:()=>import('@/views/setting/index.vue'),
+      children:[
+        {
+          path:'',
+          component:()=>import('@/components/Contents.vue')
+        },
+        {
+          path:'archives',
+          component:()=>import('@/views/archives/index.vue')
+        }
+      ]
     },
     {
       path:'/archives',

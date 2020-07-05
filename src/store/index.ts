@@ -7,8 +7,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    weatherNow:{},
   },
   mutations: {
+    setWeather(state,data){
+      state.weatherNow = data;
+    }
   },
   actions: {
   },

@@ -13,11 +13,6 @@
                             <span>首页</span>
                         </el-dropdown-item>
                     </router-link>
-                    <router-link  to='/setting'>
-                         <el-dropdown-item icon='el-icon-setting'>
-                            <span>文章管理</span>
-                        </el-dropdown-item>
-                    </router-link>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>

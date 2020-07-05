@@ -1,14 +1,10 @@
 import axios from 'axios'
-import store from '@/store/index.js'
-import router from '@/router/index.js'
 
 
 const service = axios.create({
-  baseURL:'https://api.sssyao.cn/',
+  baseURL:"https://api.sssyao.cn/",
   timeout: 120000,
 })
-
-//service.defaults.headers['Content-Type'] = "application/x-www-form-urlencoded;charset=UTF-8";
 
 
 service.interceptors.request.use(
@@ -23,7 +19,9 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
-    return response.data
+    if(response.data.code === 0){
+      return response.data
+    }
   },
   error => {
     return error

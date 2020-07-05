@@ -26,11 +26,13 @@ export default {
                 })
             }).then(res=>{
                 var audioArr = res.map(item=>{
+                    let picUrl = item.al.picUrl.replace('http','https');
+                    let audioUrl = item.url.replace('http','https');
                     return {
                         name:item.name,
                         artist:item.ar[0].name || '',
-                        url:item.url,
-                        cover:item.al.picUrl
+                        url:audioUrl,
+                        cover:picUrl,
                     }
                 })
                 const ap = new APlayer({
@@ -38,7 +40,7 @@ export default {
                     listMaxHeight: "220px",
                     lrcType: 0,
                     audio:audioArr
-                });
+                });  
             }).catch(err=>{
                 console.log(err)
             })
