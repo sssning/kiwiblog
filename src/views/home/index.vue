@@ -8,13 +8,16 @@
                 <router-view></router-view>
             </div>
              <div class='toolbar'>
+                <div class='toolbar-user toolbar-item'>
+                    <UserCard />
+                </div>
                 <div class='toolbar-weather toolbar-item' style="padding:0">
-                    <Weather />
+                    <Weather  v-loading='weaterLoding' />
                 </div>
                 <div class='toolbar-musicbox toolbar-item'>
                     <h4>音乐盒</h4>
                     <div class='toolbar-content'>
-                         <APlayer v-loading='loading'/>
+                         <APlayer v-loading='aPlayerloading'/>
                     </div>
                 </div>
             </div>
@@ -26,12 +29,14 @@
 <script>
 import APlayer from "@/components/APlayer"
 import Weather from '@/components/Weather'
+import UserCard from '@/components/UserCard'
 
 export default {
     name:'home',
     data(){
         return{
-            loading:true,
+            weaterLoding:true,
+            aPlayerloading:true,
             docsList:[],
             totalCount:0,
             sendData:{
@@ -40,10 +45,7 @@ export default {
             }
         }
     },
-    components:{APlayer,Weather},
-    mounted:function(){
-
-    }
+    components:{APlayer,Weather,UserCard},
 }
 </script>
 

@@ -10,7 +10,7 @@ const routes: Array<RouteConfig> = [
       children:[
         {
           path:'',
-          component:()=>import('@/components/Contents.vue')
+          component:()=>import('@/views/contents/index.vue')
         },
         {
           path:'archives',

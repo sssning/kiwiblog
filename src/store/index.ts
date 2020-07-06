@@ -7,11 +7,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    sideTool:{},
     weatherNow:{},
   },
   mutations: {
     setWeather(state,data){
       state.weatherNow = data;
+    },
+    setSideTool(state,data){
+      state.sideTool = data;
     }
   },
   actions: {

@@ -16,15 +16,6 @@
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
-        <div class='tools-link'>
-            <el-tooltip v-for='item in linkUrl' :key='item.svg' class="item" effect="dark" :content="item.text" placement="bottom">
-                <a :href='item.src' target="_blank">
-                    <svg aria-hidden="true" class='icon svg'>
-                        <use :xlink:href='item.svg'></use>
-                    </svg>
-                </a>
-            </el-tooltip>
-        </div>
     </div>
 </template>
 
@@ -34,13 +25,7 @@ export default {
     name:'navigation',
     data(){
         return{
-            linkUrl:[
-                {src:'https://github.com/sssning',svg:'#icon-github',text:'gihub'},
-                {src:'https://steamcommunity.com/profiles/76561198104671233/',svg:'#icon-steam',text:'steam'},
-                {src:'https://www.zhihu.com/people/xing-yuan-95-98',svg:'#icon-zhihu',text:'知乎'},
-                {src:'https://space.bilibili.com/8089279',svg:'#icon-bilibili-fill',text:'bilibili'},
-                {src:'https://weibo.com/u/5022389255',svg:'#icon-weibo',text:'weibo'},
-            ]
+           
         }
     }
 }
@@ -71,28 +56,6 @@ export default {
             color: #fff;
             padding: 0 10px;
             cursor: pointer;
-        }
-    }
-    .tools-link{
-        display: flex;
-        a{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 42px;
-            height: 42px;
-            border-radius: 42px;
-            color: rgba(0,0,0,.5);
-            margin: 0 4px;
-            &:hover{
-                .svg{
-                    transform: scale(1.5);
-                }
-            }
-            .svg{
-                width: 60%;
-                height: 60%;
-            }
         }
     }
 }

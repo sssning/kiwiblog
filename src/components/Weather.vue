@@ -19,9 +19,7 @@ export default {
         })(document)
     },
     mounted:function(){
-        this.$nextTick(function(){
-            
-        })
+        
     }
 }
 </script>

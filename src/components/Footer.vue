@@ -1,14 +1,13 @@
 <template>
     <div id='footer'>
         <p>©2020kiwiBlog. ALL RIGHTS RESERVED. </p>
-        <p>{{setting.record}}</p>
+        <p>{{this.$store.state.sideTool.record}}</p>
     </div>
 </template>
 
 <script>
 export default {
     name:'footerBar',
-    props:['setting']
 }
 </script>
 

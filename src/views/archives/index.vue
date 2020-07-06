@@ -39,8 +39,9 @@
                         <div class='img'><img src='https://raindays.cn/image/comment/10.jpg' /></div>
                         <div class='name'>
                             <a href='javascript:void(0);'>{{item.name}}</a>
-                            <div>
-                              <span>{{item.date}}</span>  
+                            <div class='r'>
+                                <div class='reply'>回复</div>
+                                <span>{{item.date}}</span>  
                             </div>
                         </div>
                     </div>
@@ -227,6 +228,12 @@ export default {
                 }
             }
             .comment-item{
+                position: relative ;
+                &:hover{
+                    .reply{
+                        opacity: 1 !important;
+                    }
+                }
                 .head{
                     display: flex;
                     img{
@@ -252,11 +259,24 @@ export default {
                                 text-decoration: underline;
                             }
                         }
-                        span{
-                            color: #999;
-                            font-size: 13px;
-                            letter-spacing: 0;
-                        }
+                        .r{
+                            display: flex;
+                            .reply{
+                                opacity: 0;
+                                font-size: 13px;
+                                color: #ef6d57;
+                                margin-right: 12px;
+                                cursor: pointer;
+                                transition: all .2s;
+                                text-decoration: underline;
+                                text-transform: capitalize;
+                            }
+                            span{
+                                color: #999;
+                                font-size: 13px;
+                                letter-spacing: 0;
+                            }
+                        }  
                     }
                 }
                 .comment-content{

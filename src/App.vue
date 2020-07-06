@@ -2,8 +2,8 @@
   <div id="app">
       <section>
         <Navigation />
-          <router-view/>
-        <FooterBar :setting='setting' />
+        <router-view/>
+        <FooterBar />
       </section>
        <el-backtop>
       </el-backtop>   
@@ -13,24 +13,23 @@
 
 <script>
 import Vue from 'vue'
-import {getSettingInfo} from '@/api/setting'
-import '@/style/style.css'
-import '@/style/iconfont/iconfont.js'
 import Navigation from '@/components/Navigation'
 import FooterBar from "@/components/Footer"
+import {getSideTool} from '@/api/sideTool'
+import '@/style/style.css'
+import '@/style/iconfont/iconfont.js'
 import axios from 'axios'
 
 export default {
     data(){
         return{
-           setting:{} 
         }
     },
     components:{Navigation,FooterBar},
     methods:{
       getSetting(){
-        getSettingInfo().then(res=>{
-          this.setting = res.data;
+        getSideTool().then(res=>{
+          this.$store.commit('setSideTool',res.data);
           this.getWeather(res.ip);
         })
       },
@@ -45,7 +44,7 @@ export default {
         })
       }
     },
-    created:function(){
+    mounted:function(){
       this.getSetting();  
     }
 }
@@ -66,5 +65,7 @@ export default {
   fill: currentColor;
   overflow: hidden;
 }
-
+#bgm{
+  margin-top: 100px;
+}
 </style>
