@@ -44,7 +44,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     z-index: 99;
-    background: #fff;
+    background: #ffffff14;
     .tools-nav{
         display: flex;
         align-items: center;

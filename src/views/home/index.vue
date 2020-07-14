@@ -1,9 +1,7 @@
 <template>
     <div id='home'>
-        <div class='section-banner'>
-            <div class='banner'></div>
-        </div>
-        <div class='section-content'>
+        <el-image class='bg' :src="sideTool.background" fit="cover" > </el-image>
+        <div class='content'>
             <div class='container'>
                 <router-view></router-view>
             </div>
@@ -35,6 +33,7 @@ export default {
     name:'home',
     data(){
         return{
+            sideTool:this.$store.state.sideTool,
             weaterLoding:true,
             aPlayerLoading:true,
             docsList:[],
@@ -53,28 +52,23 @@ export default {
 #home{
     width: 100%;
     min-height: 700px;
-    .section-banner{
-        height: 100vh;
-        position: relative;
-        .banner{
-            width: 100%;
-            height: 100%;
-            background: url('https://img.sssyao.cn/images/img2.jpg')  no-repeat center/cover;
-            background-attachment: fixed;
-            position: absolute;
-            z-index: -1;
-            top: 0;
-        }
-    }
-    .section-content{
+    .bg{
         width: 100%;
-        padding: 50px 0;
-        background: #f4f5f7;
+        height: 100%;
+        background-size: cover;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    .content{
+        width: 100%;
+        padding-top: 150px;
         display: flex;
         justify-content: center;
         .toolbar{
             width: 20%;
             margin-left: 15px;
+            position: relative;
             .toolbar-item{
                 background: #fff;
                 padding: 10px;

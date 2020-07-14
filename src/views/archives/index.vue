@@ -107,12 +107,11 @@ export default {
             })
         },
         backContent(){
-            var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
             var timer = setInterval(function(){
                 var osTop = document.documentElement.scrollTop || document.body.scrollTop;
                 var isSpeed = Math.floor(-osTop / 8);
                 document.documentElement.scrollTop = document.body.scrollTop = osTop + isSpeed;
-                if (osTop <= clientHeight) {
+                if (osTop <= 0) {
                     clearInterval(timer);
                 }
             },16)
@@ -132,16 +131,14 @@ export default {
 <style lang="scss" >
 #archives{
     width: 100%;
+    position: relative;
     .archives-main{  
-        position: relative;
-        padding-top: 4rem;
         padding-bottom: 4rem;
         .archives-container{
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
             .card{
-                margin-top: -150px;
                 padding: 30px 50px;
                 box-sizing: border-box;
                 min-width: 600px;

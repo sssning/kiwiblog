@@ -11,7 +11,7 @@
             <div class='itemarticle-card'>
                 <el-row>
                     <el-col :span="10"><h3 class='itemarticle-title'>{{item.title}} </h3></el-col>
-                    <el-col :span="12">
+                    <el-col :span="16">
                         <div class='r'>
                             <div class='itemarticle-extra'>
                                 <span><i class="el-icon-date"></i> {{item.date}}</span>
@@ -66,6 +66,8 @@ export default {
     },
     mounted:function(){
        this.getDocs();
+       var ndate = new Date().getHours();
+        console.log(ndate)
     }
 }
 </script>
@@ -73,6 +75,7 @@ export default {
 <style lang="scss" scoped>
 #content{
     text-align: center;
+    position: relative;
     .itemarticle-content{
         display: block;
         min-width: 600px;
