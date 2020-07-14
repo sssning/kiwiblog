@@ -1,16 +1,30 @@
 <template>
-    <div id='contents'>
-         <router-link class='docs-item'  :to="{path:'/archives',query:{id:item.id}}" v-for="(item,index) in docsList" :key='index'>
-            <img src='https://img.sssyao.cn/images/img2.jpg'/>
-            <div  class='docs-item-card' >
-                <el-row >
-                    <el-col :span="10"><h3 class='card-title'>{{item.title}} </h3></el-col>
-                    <el-col :span="10">
-                        <div class='info'>
-                            <span><i class="el-icon-date"></i> {{item.date}}</span>
-                            <span><i class='el-icon-view'></i> {{item.views}}</span>
+    <div id='content'>
+         <router-link class='itemarticle-content'  :to="{path:'/archives',query:{id:item.id}}" v-for="(item,index) in docsList" :key='index'>
+            <div class='itemarticle-img' >
+                 <el-image 
+                    fit="cover"
+                    :lazy="true"
+                    :src="item.banner">
+                </el-image>
+            </div>
+            <div class='itemarticle-card'>
+                <el-row>
+                    <el-col :span="10"><h3 class='itemarticle-title'>{{item.title}} </h3></el-col>
+                    <el-col :span="12">
+                        <div class='r'>
+                            <div class='itemarticle-extra'>
+                                <span><i class="el-icon-date"></i> {{item.date}}</span>
+                                <span><i class='el-icon-view'></i> {{item.views}}</span>
+                            </div>
+                            <div class='itemarticle-tags'>
+                                <el-tag
+                                    v-for="item in item.tags"
+                                    :key="item">
+                                    {{ item }}
+                                </el-tag>
+                            </div>
                         </div>
-                        <p>随时更新，请不要频繁刷新接口</p>
                     </el-col>
                 </el-row>
             </div>
@@ -57,27 +71,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#contents{
+#content{
     text-align: center;
-    .docs-item{
+    .itemarticle-content{
         display: block;
         min-width: 600px;
         background: #fff;
         border-radius: 10px;
-        margin-bottom: 30px;
+        margin-bottom: 15px;
         box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07) ;
-        img{
-            width: 100%;
+        .itemarticle-img{
+            position: relative;
+            height: 380px;
             border-radius: 10px 10px 0 0;
             display: block;
+            background-size: cover;
+            background-repeat: no-repeat;
+            .el-image{
+                height: 100%;
+                width: 100%;
+                border-radius: 10px 10px 0 0;
+            }
         }
-        .docs-item-card{
-            height: 120px;
+        .itemarticle-card{
             padding: 1.5rem;
             box-sizing: border-box;
             background: #fff;
             border-radius: 0 0 10px 10px;       
-            .card-title{
+            .itemarticle-title{
                 font-size: 1.6275rem;
                 font-weight: 600;
             }
@@ -87,15 +108,35 @@ export default {
                 align-items: center;
                 text-align: center;
                 font-size: 14px;
-                .info{
-                    margin-bottom: 5px;
-                    span{
-                        margin-right: 10px;
+                .r{
+                    display: flex;
+                    align-items: center;
+                    .itemarticle-extra{
+                        width: 50%;
+                        span{
+                            margin-right: 10px;
+                        }
                     }
-                }
+                    .itemarticle-tags{
+                        .el-tag{
+                            margin:0 5px;
+                        }
+                    }
+                } 
             }
         }
     }
 }
+.el-pagination{
+    padding-top: 30px;
+}   
 
+@keyframes sss {
+    form{
+        transform: scale(1);
+    }
+    to{
+        transform: scale(1.25);
+    }
+}
 </style>

@@ -30,7 +30,6 @@ export default {
       getSetting(){
         getSideTool().then(res=>{
           this.$store.commit('setSideTool',res.data);
-          this.getWeather(res.ip);
         })
       },
       getWeather(ip){

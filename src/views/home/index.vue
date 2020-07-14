@@ -17,7 +17,7 @@
                 <div class='toolbar-musicbox toolbar-item'>
                     <h4>音乐盒</h4>
                     <div class='toolbar-content'>
-                         <APlayer v-loading='aPlayerloading'/>
+                         <APlayer v-loading='aPlayerLoading'/>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@ export default {
     data(){
         return{
             weaterLoding:true,
-            aPlayerloading:true,
+            aPlayerLoading:true,
             docsList:[],
             totalCount:0,
             sendData:{

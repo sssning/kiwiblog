@@ -11,7 +11,10 @@
                         </p>
                    </div>
                    <el-divider></el-divider>
-                   <div class='content' v-html="docs.html" ></div>
+                   <div class='card-content' v-html="docs.html" ></div>
+                   <div class='card-footer'>
+                       <span>最后编辑：{{docs.lasttime}}</span>
+                    </div>
                    <el-divider></el-divider>
                </div>
             </div>
@@ -59,6 +62,7 @@ import * as docsApi from "@/api/docs.ts"
 import {formatDate} from "@/utils/common.ts"
 import * as commentApi from "@/api/comment.ts"
 
+
 export default {
     name:'archives',
     data(){
@@ -102,10 +106,24 @@ export default {
                 this.getComments();
             })
         },
+        backContent(){
+            var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            var timer = setInterval(function(){
+                var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+                var isSpeed = Math.floor(-osTop / 8);
+                document.documentElement.scrollTop = document.body.scrollTop = osTop + isSpeed;
+                if (osTop <= clientHeight) {
+                    clearInterval(timer);
+                }
+            },16)
+        }
     },
     created:function(){
         this.getDocsDetails();
         this.getComments();
+    },
+    mounted:function(){
+       this.backContent();
     }
 
 }
@@ -133,7 +151,7 @@ export default {
                 z-index: 2;
                 border-radius: 10px;
                 box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07) ;   
-                .content{
+                .card-content{
                     h1,h2,h3,h4,h5,h6{
                         margin-bottom: 16px;
                         color: #000;
@@ -193,6 +211,9 @@ export default {
                         }
                     }
                 } 
+                .card-footer{
+                    text-align: right;
+                }
                 .comments{
                     padding-top:70px;
                     .zero{

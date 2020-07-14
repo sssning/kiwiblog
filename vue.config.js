@@ -1,4 +1,4 @@
-
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 module.exports = {
     // 基本路径
@@ -9,10 +9,15 @@ module.exports = {
     lintOnSave: false,
     // webpack配置
     chainWebpack: config => {
-      
+        
      },
     configureWebpack: config => { 
-
+        config.plugins.push(
+            new CompressionWebpackPlugin({
+                test: /\.js$|\.html$|\.css$/,
+                threshold: 4096
+            })
+        )
     },
     // 生产环境是否生成 sourceMap 文件
     productionSourceMap: true,

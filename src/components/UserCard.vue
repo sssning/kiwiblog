@@ -8,11 +8,11 @@
         </div>
         <div class='works'>
             <div class='works-item'>
-                <p class='num'>121</p>
+                <p class='num'>{{sideTool.docs}}</p>
                 <p class='text'>文章</p>
             </div>
             <div class='works-item'>
-                <p class='num'>121</p>
+                <p class='num'>{{sideTool.comments}}</p>
                 <p class='text'>评论</p>
             </div>
         </div>

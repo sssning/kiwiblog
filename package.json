@@ -27,6 +27,7 @@
     "@vue/cli-plugin-typescript": "~4.4.0",
     "@vue/cli-plugin-vuex": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
+    "compression-webpack-plugin": "^4.0.0",
     "css-loader": "^3.6.0",
     "file-loader": "^6.0.0",
     "node-sass": "^4.14.1",
